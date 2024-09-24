@@ -22,18 +22,18 @@ describe('Input component', () => {
   it('should call onChange when input value changes', () => {
     render(<Input label='labelText' onChange={mockOnChange} />);
 
-    const input = screen.getByRole('textbox');
+    const input = screen.getByLabelText(/labelText/i);
 
-    userEvent.type(input, 'typinggg');
-    expect(mockOnChange).toHaveBeenCalledWith('typinggg');
+    userEvent.type(input, '5');
+    expect(mockOnChange).toHaveBeenCalledWith(5);
   });
 
   it('should change value correctly when value is typed', () => {
-    render(<Input label='' onChange={mockOnChange} />);
+    render(<Input label='labelText' onChange={mockOnChange} />);
 
-    const input = screen.getByRole('textbox');
+    const input = screen.getByLabelText(/labelText/i);
 
-    userEvent.type(input, 'typinggg');
-    expect(input).toHaveValue('typinggg');
+    userEvent.type(input, '5');
+    expect(input).toHaveValue(5);
   });
 });
