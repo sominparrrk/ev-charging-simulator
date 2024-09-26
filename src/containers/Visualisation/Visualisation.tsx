@@ -1,5 +1,5 @@
 const Visualisation = () => {
-  return <div className='input-data__container'>visualisation</div>;
+  return <div className='visualisation__container'>visualisation</div>;
 };
 
 export default Visualisation;

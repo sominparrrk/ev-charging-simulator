@@ -6,14 +6,14 @@ const mockOnClick = jest.fn();
 
 describe('Button component', () => {
   it('should render label', () => {
-    render(<Button label='labelText' onClick={mockOnClick} />);
+    render(<Button label='labelText' type='button' onClick={mockOnClick} />);
 
     const labelText = screen.getByText('labelText');
     expect(labelText).toBeInTheDocument();
   });
 
   it('should call onClick if it is clicked', () => {
-    render(<Button label='labelText' onClick={mockOnClick} />);
+    render(<Button label='labelText' type='button' onClick={mockOnClick} />);
 
     const button = screen.getByRole('button');
     userEvent.click(button);
@@ -21,7 +21,14 @@ describe('Button component', () => {
   });
 
   it('should not call onClick if it is disabled', () => {
-    render(<Button label='labelText' onClick={mockOnClick} disabled={true} />);
+    render(
+      <Button
+        label='labelText'
+        type='button'
+        onClick={mockOnClick}
+        disabled={true}
+      />
+    );
 
     const button = screen.getByRole('button');
     userEvent.click(button);

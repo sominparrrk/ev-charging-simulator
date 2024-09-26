@@ -13,8 +13,8 @@ describe('simulateCharging function', () => {
     const result = simulateCharging(
       DEFAULT_NUM_CHARGEPOINTS,
       DEFAULT_MULTIPLIER,
-      DEFAULT_CHARGE_POWER,
-      DEFAULT_CHARGING_NEEDS
+      DEFAULT_CHARGING_NEEDS,
+      DEFAULT_CHARGE_POWER
     );
 
     expect(result.theoreticalMaxPowerDemand).toBe(
