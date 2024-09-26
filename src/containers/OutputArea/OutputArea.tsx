@@ -1,5 +1,12 @@
+import { useSimulationContext } from '../../context/SimulationContext';
+
 const OutputArea = () => {
-  return <div className='output-area__container'>output data</div>;
+  const { result } = useSimulationContext();
+  return (
+    <div className='output-area__container'>
+      output area {result?.actualMaxPowerDemand}
+    </div>
+  );
 };
 
 export default OutputArea;

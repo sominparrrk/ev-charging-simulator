@@ -8,3 +8,10 @@ export type SimulatorInput = {
   consumptionOfCars: number;
   chargingPowerPerChargePoint: number;
 };
+
+export type SimulatorOutput = {
+  totalEnergyConsumed: number;
+  theoreticalMaxPowerDemand: number;
+  actualMaxPowerDemand: number;
+  concurrencyFactor: number;
+};
