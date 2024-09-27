@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`${className} px-4 py-2 rounded-lg font-semibold hover:text-white duration-500`}
+      className={`${className} px-4 py-2 rounded-lg hover:text-white duration-500`}
       type={type}
       onClick={onClick}
       disabled={disabled}

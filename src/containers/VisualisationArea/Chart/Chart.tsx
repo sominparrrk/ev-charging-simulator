@@ -22,8 +22,8 @@ const Chart = ({ data, selectedValue }: ChartProps) => {
 
   return (
     <LineChart
-      width={width}
-      height={height - 350}
+      width={width - 48}
+      height={height - 480}
       data={transformedData?.[Number(selectedValue)]}
       margin={{
         top: 5,

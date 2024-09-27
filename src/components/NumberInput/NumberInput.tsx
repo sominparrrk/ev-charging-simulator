@@ -5,6 +5,7 @@ interface NumberInputProps {
   placeholder?: string;
   min?: number;
   max?: number;
+  unit?: string;
   isError?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -16,28 +17,32 @@ const NumberInput: React.FC<NumberInputProps> = ({
   placeholder = 'Type here',
   min,
   max,
+  unit,
   isError = false,
   onChange,
 }) => {
   return (
-    <div className='flex gap-2 items-center'>
-      <label className='font-semibold' htmlFor={label}>
+    <div className='flex flex-col gap-2 justify-between'>
+      <label className='text-sm' htmlFor={label}>
         {label}
       </label>
-      <input
-        className={`px-4 py-2 font-semibold rounded-lg border border-gray-300 duration-500 ${
-          isError ? 'focus:border-rose-800' : 'focus:border-green-600'
-        }`}
-        id={label}
-        name={name}
-        type='text'
-        value={value}
-        placeholder={placeholder}
-        min={min}
-        max={max}
-        pattern='[0-9]*'
-        onChange={onChange}
-      />
+      <div className='flex flex-row gap-2 items-end'>
+        <input
+          className={`w-max lg:w-4/5 px-4 py-2 rounded-lg border border-gray-300 duration-500 ${
+            isError ? 'focus:border-rose-800' : 'focus:border-green-600'
+          }`}
+          id={label}
+          name={name}
+          type='text'
+          value={value}
+          placeholder={placeholder}
+          min={min}
+          max={max}
+          pattern='[0-9]*'
+          onChange={onChange}
+        />
+        {unit && <label className='text-xs'>{unit}</label>}
+      </div>
     </div>
   );
 };

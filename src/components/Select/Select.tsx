@@ -24,7 +24,7 @@ const Select: React.FC<SelectProps> = ({ label, options, value, onChange }) => {
       </label>
       <select
         id={label}
-        className='select px-4 py-2 rounded-lg border border-gray-300 focus:border-green-600'
+        className='select px-3 py-1 rounded-lg border border-gray-300 focus:border-green-600'
         value={value}
         onChange={handleChange}
       >
