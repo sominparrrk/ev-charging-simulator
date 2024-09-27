@@ -14,4 +14,5 @@ export type SimulatorOutput = {
   theoreticalMaxPowerDemand: number;
   actualMaxPowerDemand: number;
   concurrencyFactor: number;
+  dailyUsagePerChargePoint: number[][];
 };

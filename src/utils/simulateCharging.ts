@@ -37,18 +37,26 @@ export const getChargingDemandProbability = () => {
 };
 
 export const simulateCharging = (
-  numChargepoints: number,
+  numChargePoints: number,
   arrivalProbabilityMultiplier: number,
   chargingNeeds: number,
   chargePower: number
 ) => {
-  const theoreticalMaxPowerDemand = numChargepoints * chargePower;
+  const theoreticalMaxPowerDemand = numChargePoints * chargePower;
   let totalEnergyConsumed = 0; // kWh
   let actualMaxPowerDemand = 0; // kW
-  let chargePoints = Array(numChargepoints).fill(0);
+  let chargePoints = Array(numChargePoints).fill(0);
+  const dailyUsagePerChargePoint: number[][] = Array(numChargePoints)
+    .fill(0)
+    .map(() => Array(365).fill(0));
 
+  let currentDay = 0;
   for (let tick = 0; tick < TOTAL_TICKS; tick++) {
     const currentHour = Math.floor((tick % TICKS_PER_DAY) / 4);
+
+    if (tick % TICKS_PER_DAY === 0 && tick > 0) {
+      currentDay++;
+    }
 
     chargePoints = chargePoints.map((timer) => Math.max(0, timer - 1));
 
@@ -69,6 +77,7 @@ export const simulateCharging = (
           totalEnergyConsumed += energyNeededKWh;
           chargePoints[i] = chargingTimeTicks;
           currentPowerDemand += chargePower;
+          dailyUsagePerChargePoint[i][currentDay] += energyNeededKWh;
         }
       }
     }
@@ -86,6 +95,7 @@ export const simulateCharging = (
     theoreticalMaxPowerDemand,
     actualMaxPowerDemand,
     concurrencyFactor,
+    dailyUsagePerChargePoint,
   };
 };
 
