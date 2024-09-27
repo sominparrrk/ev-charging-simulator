@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Button from '../../../components/Button/Button';
 import NumberInput from '../../../components/NumberInput/NumberInput';
 import { SimulatorInput } from '../../../types/simulator';
@@ -7,6 +7,14 @@ import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 interface FormProps {
   onSubmit: (formValues: SimulatorInput) => void;
 }
+
+interface ComponentProps {
+  children: ReactNode;
+}
+
+const InputWrapper: React.FC<ComponentProps> = ({ children }) => {
+  return <div className='flex flex-col gap-1'>{children}</div>;
+};
 
 const Form = ({ onSubmit }: FormProps) => {
   const [formValues, setFormValues] = useState({
@@ -32,7 +40,7 @@ const Form = ({ onSubmit }: FormProps) => {
         break;
       case 'arrivalProbability':
         if (value < 20 || value > 100) {
-          return 'Arrival probability multiplier should be between 20 and 100';
+          return 'Arrival probability multiplier should be 20 - 100';
         }
         break;
       case 'consumptionOfCars':
@@ -102,56 +110,71 @@ const Form = ({ onSubmit }: FormProps) => {
   };
 
   return (
-    <form className='input-form__container' onSubmit={handleSubmit}>
-      <NumberInput
-        label='Number of charge points'
-        name='numberOfChargePoints'
-        value={formValues.numberOfChargePoints}
-        onChange={handleChange}
-        min={1}
-        isError={!!errorMessages.numberOfChargePoints}
-      />
-      {errorMessages.numberOfChargePoints && (
-        <ErrorMessage>{errorMessages.numberOfChargePoints}</ErrorMessage>
-      )}
-      <NumberInput
-        label='Arrival probability multiplier'
-        name='arrivalProbability'
-        value={formValues.arrivalProbability}
-        onChange={handleChange}
-        min={20}
-        max={100}
-        isError={!!errorMessages.arrivalProbability}
-      />
-      {errorMessages.arrivalProbability && (
-        <ErrorMessage>{errorMessages.arrivalProbability}</ErrorMessage>
-      )}
-      <NumberInput
-        label='Consumption of cars'
-        name='consumptionOfCars'
-        value={formValues.consumptionOfCars}
-        onChange={handleChange}
-        min={1}
-        isError={!!errorMessages.consumptionOfCars}
-      />
-      {errorMessages.consumptionOfCars && (
-        <ErrorMessage>{errorMessages.consumptionOfCars}</ErrorMessage>
-      )}
-      <NumberInput
-        label='Charging power / charge points'
-        name='chargingPowerPerChargePoint'
-        value={formValues.chargingPowerPerChargePoint}
-        onChange={handleChange}
-        min={1}
-        isError={!!errorMessages.chargingPowerPerChargePoint}
-      />
-      {errorMessages.chargingPowerPerChargePoint && (
-        <ErrorMessage>{errorMessages.chargingPowerPerChargePoint}</ErrorMessage>
-      )}
-      <div className='button-group'>
+    <form className='form__container w-full' onSubmit={handleSubmit}>
+      <div className='input-container flex justify-center grid lg:grid-rows-2 lg:grid-cols-2 gap-4'>
+        <InputWrapper>
+          <NumberInput
+            label='Number of charge points'
+            name='numberOfChargePoints'
+            value={formValues.numberOfChargePoints}
+            onChange={handleChange}
+            min={1}
+            isError={!!errorMessages.numberOfChargePoints}
+          />
+          {errorMessages.numberOfChargePoints && (
+            <ErrorMessage>{errorMessages.numberOfChargePoints}</ErrorMessage>
+          )}
+        </InputWrapper>
+        <InputWrapper>
+          <NumberInput
+            label='Arrival probability multiplier'
+            name='arrivalProbability'
+            value={formValues.arrivalProbability}
+            onChange={handleChange}
+            min={20}
+            max={100}
+            unit='%'
+            isError={!!errorMessages.arrivalProbability}
+          />
+          {errorMessages.arrivalProbability && (
+            <ErrorMessage>{errorMessages.arrivalProbability}</ErrorMessage>
+          )}
+        </InputWrapper>
+        <InputWrapper>
+          <NumberInput
+            label='Consumption of cars'
+            name='consumptionOfCars'
+            value={formValues.consumptionOfCars}
+            onChange={handleChange}
+            min={1}
+            unit='kWh'
+            isError={!!errorMessages.consumptionOfCars}
+          />
+          {errorMessages.consumptionOfCars && (
+            <ErrorMessage>{errorMessages.consumptionOfCars}</ErrorMessage>
+          )}
+        </InputWrapper>
+        <InputWrapper>
+          <NumberInput
+            label='Charging power / charge points'
+            name='chargingPowerPerChargePoint'
+            value={formValues.chargingPowerPerChargePoint}
+            onChange={handleChange}
+            min={1}
+            unit='kW'
+            isError={!!errorMessages.chargingPowerPerChargePoint}
+          />
+          {errorMessages.chargingPowerPerChargePoint && (
+            <ErrorMessage>
+              {errorMessages.chargingPowerPerChargePoint}
+            </ErrorMessage>
+          )}
+        </InputWrapper>
+      </div>
+      <div className='button-group mt-8 flex gap-4 justify-center'>
         <Button
           className='bg-gray-300 hover:bg-gray-600'
-          label='Cancel'
+          label='Reset'
           onClick={handleCancel}
           type='button'
         />

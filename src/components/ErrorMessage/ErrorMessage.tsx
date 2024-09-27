@@ -5,7 +5,7 @@ interface ErrorMessageProps {
 }
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ children }) => {
-  return <div className='text-rose-800'>{children}</div>;
+  return <div className='text-rose-800 text-xs'>{children}</div>;
 };
 
 export default ErrorMessage;
