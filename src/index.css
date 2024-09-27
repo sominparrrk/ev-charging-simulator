@@ -6,10 +6,18 @@
 .App {
   font-family: 'DM Sans', sans-serif;
   font-optical-sizing: auto;
-  font-weight: <weight>;
+  font-weight: weight;
   font-style: normal;
 }
 
 input:focus {
   outline: none;
+}
+
+select {
+  appearance: none;
+  background-image: url(../public/icons/down-chevron.svg);
+  background-repeat: no-repeat;
+  background-position: right 0.6rem top 50%;
+  background-size: 0.8rem auto;
 }

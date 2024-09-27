@@ -1,6 +1,6 @@
 import InputData from '../containers/InputArea/InputArea';
 import OutputArea from '../containers/OutputArea/OutputArea';
-import Visualisation from '../containers/Visualisation/Visualisation';
+import VisualisationArea from '../containers/VisualisationArea/VisualisationArea';
 
 const Main = () => {
   return (
@@ -10,12 +10,12 @@ const Main = () => {
           EV Charging Simulator
         </h1>
       </div>
-      <div className='main__container flex flex-row'>
-        <div className='data__container flex flex-col'>
+      <div className='main__container flex flex-col'>
+        <div className='data__container flex flex-row'>
           <InputData />
           <OutputArea />
         </div>
-        <Visualisation />
+        <VisualisationArea />
       </div>
     </div>
   );
