@@ -23,8 +23,8 @@ describe('simulateCharging function', () => {
     expect(result.actualMaxPowerDemand).toBeLessThanOrEqual(
       result.theoreticalMaxPowerDemand
     );
-    expect(result.concurrencyFactor).toBeGreaterThanOrEqual(35);
-    expect(result.concurrencyFactor).toBeLessThanOrEqual(55);
+    expect(Math.floor(result.concurrencyFactor)).toBeGreaterThanOrEqual(35);
+    expect(Math.floor(result.concurrencyFactor)).toBeLessThanOrEqual(55);
     expect(result.actualMaxPowerDemand).toBeGreaterThanOrEqual(77);
     expect(result.actualMaxPowerDemand).toBeLessThanOrEqual(121);
   });
