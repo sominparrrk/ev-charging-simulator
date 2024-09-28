@@ -39,7 +39,7 @@ const VisualisationArea = () => {
         simulatorResult ? '' : 'blur'
       } visualisation__container flex flex-col gap-4`}
     >
-      <Title>Charging values per chargepoint</Title>
+      <Title>Total energy charged per day</Title>
       <Select
         label='Select chargepoint'
         options={selectOptions}
