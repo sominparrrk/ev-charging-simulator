@@ -100,38 +100,34 @@ export const simulateCharging = (
 };
 
 // Task 1: Run the simulation for 20 chargepoints
-/*
-  const result = simulateCharging(
-    DEFAULT_NUM_CHARGEPOINTS,
+const result = simulateCharging(
+  DEFAULT_NUM_CHARGEPOINTS,
+  DEFAULT_MULTIPLIER,
+  DEFAULT_CHARGE_POWER,
+  DEFAULT_CHARGING_NEEDS
+);
+console.log(
+  `Total Energy Consumed: ${result.totalEnergyConsumed.toFixed(2)} kWh`
+);
+console.log(
+  `Theoretical Max Power Demand: ${result.theoreticalMaxPowerDemand} kW`
+);
+console.log(`Actual Max Power Demand: ${result.actualMaxPowerDemand} kW`);
+console.log(`Concurrency Factor: ${result.concurrencyFactor.toFixed(2)} %`);
+
+// Task 1 Bonus: Run the simulation for 1 to 30 chargepoints
+// When the number of chargepoints increases, the concurrency factor tends to decrease
+for (let i = 1; i <= 30; i++) {
+  const { concurrencyFactor } = simulateCharging(
+    i,
     DEFAULT_MULTIPLIER,
     DEFAULT_CHARGE_POWER,
     DEFAULT_CHARGING_NEEDS
   );
   console.log(
-    `Total Energy Consumed: ${result.totalEnergyConsumed.toFixed(2)} kWh`
+    `Chargepoints: ${i}, Concurrency Factor: ${concurrencyFactor.toFixed(2)} %`
   );
-  console.log(
-    `Theoretical Max Power Demand: ${result.theoreticalMaxPowerDemand} kW`
-  );
-  console.log(`Actual Max Power Demand: ${result.actualMaxPowerDemand} kW`);
-  console.log(`Concurrency Factor: ${result.concurrencyFactor.toFixed(2)} %`);
-*/
-
-// Task 1 Bonus: Run the simulation for 1 to 30 chargepoints
-// When the number of chargepoints increases, the concurrency factor tends to decrease
-/*
-  for (let i = 1; i <= 30; i++) {
-    const { concurrencyFactor } = simulateCharging(
-      i,
-      DEFAULT_MULTIPLIER,
-      DEFAULT_CHARGE_POWER,
-      DEFAULT_CHARGING_NEEDS
-    );
-    console.log(
-      `Chargepoints: ${i}, Concurrency Factor: ${concurrencyFactor.toFixed(2)} %`
-    );
-  }
-*/
+}
 
 // Task 2a Frontend: Get the deviation of the concurrency factor for 1 to `numChargePoints` chargepoints
 export const getConcurrencyDeviation = (
