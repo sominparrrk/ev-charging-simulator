@@ -10,7 +10,7 @@ const Main = () => {
           EV Charging Simulator
         </h1>
       </div>
-      <div className='main__container flex flex-col gap-16 pt-12 px-8'>
+      <div className='main__container flex flex-col gap-16 py-12 px-8'>
         <div className='data__container flex flex-col gap-16 lg:flex-row justify-between'>
           <InputData />
           <OutputArea />

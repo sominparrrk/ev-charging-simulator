@@ -50,8 +50,12 @@ const VisualisationArea = () => {
         data={dailyUsagePerChargePoint}
         selectedValue={selectedValue}
       />
-      <Title>The deviation of the concurrency factor</Title>
-      <ConcurrencyDeviation data={concurrencyDeviation} />
+      {!!concurrencyDeviation.length && (
+        <>
+          <Title>The deviation of the concurrency factor</Title>
+          <ConcurrencyDeviation data={concurrencyDeviation} />
+        </>
+      )}
     </div>
   );
 };
