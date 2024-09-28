@@ -1,15 +1,28 @@
-import { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Select from '../../components/Select/Select';
 import { useSimulationContext } from '../../context/SimulationContext';
-import Chart from './Chart/Chart';
+import ValuesPerChargePoint from './Chart/ValuesPerChargePoint';
 import { defaultMockData } from '../../lib/defaultMockData';
+import ConcurrencyDeviation from './Chart/ConcurrencyDeviation';
+import { useConcurrencyContext } from '../../context/ConcurrencyContext';
+
+interface ComponentProps {
+  children: ReactNode;
+  className?: string;
+}
+
+const Title: React.FC<ComponentProps> = ({ children }) => {
+  return <h3 className='font-bold'>{children}</h3>;
+};
 
 const VisualisationArea = () => {
-  const { result } = useSimulationContext();
+  const { result: simulatorResult } = useSimulationContext();
+  const { result: concurrencyResult } = useConcurrencyContext();
   const [selectedValue, setSelectedValue] = useState('0');
   const dailyUsagePerChargePoint =
-    result?.dailyUsagePerChargePoint ||
+    simulatorResult?.dailyUsagePerChargePoint ||
     defaultMockData.dailyUsagePerChargePoint;
+  const concurrencyDeviation = concurrencyResult ? concurrencyResult : [];
   const selectOptions = Array.from(
     { length: dailyUsagePerChargePoint.length },
     (_, index) => {
@@ -23,16 +36,22 @@ const VisualisationArea = () => {
   return (
     <div
       className={`${
-        result ? '' : 'blur'
+        simulatorResult ? '' : 'blur'
       } visualisation__container flex flex-col gap-4`}
     >
+      <Title>Charging values per chargepoint</Title>
       <Select
         label='Select chargepoint'
         options={selectOptions}
         value={selectedValue}
         onChange={setSelectedValue}
       />
-      <Chart data={dailyUsagePerChargePoint} selectedValue={selectedValue} />
+      <ValuesPerChargePoint
+        data={dailyUsagePerChargePoint}
+        selectedValue={selectedValue}
+      />
+      <Title>The deviation of the concurrency factor</Title>
+      <ConcurrencyDeviation data={concurrencyDeviation} />
     </div>
   );
 };
