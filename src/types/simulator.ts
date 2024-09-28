@@ -16,3 +16,5 @@ export type SimulatorOutput = {
   concurrencyFactor: number;
   dailyUsagePerChargePoint: number[][];
 };
+
+export type ConcurrencyOutput = number[];

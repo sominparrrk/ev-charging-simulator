@@ -6,7 +6,7 @@ interface ComponentProps {
 }
 
 const Title: React.FC<ComponentProps> = ({ children }) => {
-  return <h3 className=''>{children}</h3>;
+  return <h3>{children}</h3>;
 };
 
 const Value: React.FC<ComponentProps> = ({ children }) => {

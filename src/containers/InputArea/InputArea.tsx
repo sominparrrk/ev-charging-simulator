@@ -1,10 +1,15 @@
+import { useConcurrencyContext } from '../../context/ConcurrencyContext';
 import { useSimulationContext } from '../../context/SimulationContext';
 import { SimulatorInput } from '../../types/simulator';
-import { simulateCharging } from '../../utils/simulateCharging';
+import {
+  getConcurrencyDeviation,
+  simulateCharging,
+} from '../../utils/simulateCharging';
 import Form from './Form/Form';
 
 const InputArea = () => {
   const { setSimulationResult } = useSimulationContext();
+  const { setConcurrencyResult } = useConcurrencyContext();
 
   const handleSubmit = (formValues: SimulatorInput) => {
     const {
@@ -13,14 +18,21 @@ const InputArea = () => {
       consumptionOfCars,
       chargingPowerPerChargePoint,
     } = formValues;
-    const result = simulateCharging(
+    const simulatorResult = simulateCharging(
+      numberOfChargePoints,
+      arrivalProbability,
+      consumptionOfCars,
+      chargingPowerPerChargePoint
+    );
+    const concurrencyResult = getConcurrencyDeviation(
       numberOfChargePoints,
       arrivalProbability,
       consumptionOfCars,
       chargingPowerPerChargePoint
     );
 
-    setSimulationResult(result);
+    setSimulationResult(simulatorResult);
+    setConcurrencyResult(concurrencyResult);
   };
 
   return <Form onSubmit={handleSubmit} />;

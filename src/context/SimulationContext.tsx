@@ -6,7 +6,6 @@ interface SimulationContextType {
   setSimulationResult: (result: SimulatorOutput) => void;
 }
 
-// Create the context with a default value
 const SimulationContext = createContext<SimulationContextType | undefined>(
   undefined
 );
@@ -28,7 +27,7 @@ interface SimulationProviderProps {
 export const SimulationProvider: React.FC<SimulationProviderProps> = ({
   children,
 }) => {
-  const [result, setResult] = useState<SimulatorOutput | null>(null); // Initialize with `null` or default value
+  const [result, setResult] = useState<SimulatorOutput | null>(null);
 
   const setSimulationResult = (result: SimulatorOutput) => {
     setResult(result);
