@@ -6,7 +6,7 @@ const Main = () => {
   return (
     <div>
       <div className='main__header w-screen p-4 bg-black'>
-        <h1 className='text-3xl font-semibold text-green-300'>
+        <h1 className='text-3xl text-center lg:text-left font-semibold text-green-300'>
           EV Charging Simulator
         </h1>
       </div>
